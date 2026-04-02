@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: snsDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./sns-backend/Bazaar
+      dockerfile: Dockerfile
+    image: my-backend
+    container_name: backend-container
+    depends_on:
+      - postgres
+    ports:
+      - "80:80"  # ✅ Backend 80 portunda çalışmaya devam ediyor.
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./sns-adminPanel/turizim-adimPanel
+      dockerfile: Dockerfile
+    container_name: frontend-container
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"  # ✅ Angular uygulaması dış dünyaya 4200'den açıldı.
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: my-nginx
+    ports:
+      - "4100:80"  # ✅ Nginx artık hostta 4100’den çalışıyor.
+    volumes:
+      - ./sns-adminPanel/turizim-adimPanel/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
