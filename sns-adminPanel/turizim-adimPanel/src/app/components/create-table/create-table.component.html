@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="form-card">
+    <h2>🛠️ Tablo Yönetimi</h2>
+
+    <!-- ✅ Tablo Silme -->
+    <div class="section">
+      <h3>🗑️ Tablo Sil</h3>
+      <div class="form-inline">
+        <select [(ngModel)]="selectedTableToDelete">
+          <option value="" disabled selected>Silinecek tabloyu seçin</option>
+          <option *ngFor="let table of tableNames" [value]="table">{{ table }}</option>
+        </select>
+        <button class="btn danger" (click)="deleteTable()">Sil</button>
+      </div>
+    </div>
+
+    <!-- ✅ Tablo Oluştur -->
+    <div class="section">
+      <h3>📌 Yeni Tablo Ekle</h3>
+      <div class="form-group">
+        <label>Tablo Adı:</label>
+        <input type="text" [(ngModel)]="tableName" placeholder="Tablo adı girin">
+      </div>
+
+      <!-- ✅ Sütun Ekleme -->
+      <h3>📊 Sütunlar</h3>
+      <div class="form-inline">
+        <input type="text" [(ngModel)]="columnName" placeholder="Sütun adı">
+        <select [(ngModel)]="columnType">
+          <option value="varchar">VARCHAR</option>
+          <option value="number">INTEGER</option>
+          <option value="date">DATE</option>
+          <option value="boolean">BOOLEAN</option>
+        </select>
+        <button class="btn primary" (click)="addColumn()">Ekle</button>
+      </div>
+
+      <ul class="list">
+        <li *ngFor="let col of columns; let i = index">
+          <span>{{ col.key }} ({{ col.type }})</span>
+          <button class="btn danger" (click)="removeColumn(i)">Sil</button>
+        </li>
+      </ul>
+
+      <!-- ✅ Foreign Key (Bağlantılar) -->
+      <h3>🔗 İlişkisel Bağlantılar</h3>
+      <div class="form-inline">
+        <select [(ngModel)]="selectedForeignTable" (change)="loadForeignTableColumns()">
+          <option value="" disabled selected>Tablo Seç</option>
+          <option *ngFor="let table of tableNames" [value]="table">{{ table }}</option>
+        </select>
+
+        <select [(ngModel)]="selectedRelation">
+          <option value="one-to-many">One-to-Many</option>
+          <option value="many-to-many">Many-to-Many</option>
+        </select>
+
+        <select *ngIf="foreignTableColumns.length > 0" [(ngModel)]="selectedForeignColumn">
+          <option value="" disabled selected>Kolon Seç</option>
+          <option *ngFor="let col of foreignTableColumns" [value]="col">{{ col }}</option>
+        </select>
+
+        <button class="btn join" [disabled]="!selectedForeignTable || !selectedForeignColumn" (click)="addForeignKey()">Bağla</button>
+      </div>
+
+      <ul class="list">
+        <li *ngFor="let fk of foreignKeys; let i = index">
+          <span>{{ fk.column }} → {{ fk.references }} ({{ fk.relation }}) [Kolon: {{ fk.relationColumn }}]</span>
+          <button class="btn danger" (click)="removeForeignKey(i)">Sil</button>
+        </li>
+      </ul>
+
+      <!-- ✅ Alarm Kur -->
+      <h3>⏰ Alarm Kur</h3>
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="enableAlarm" (change)="toggleAlarm()">
+        Alarm Kur
+      </label>
+
+      <!-- ✅ Tablo Oluştur Butonu -->
+      <button class="btn success full-width" (click)="createTable()">✅ Tablo Oluştur</button>
+    </div>
+
+    <!-- ✅ Tablo Önizleme -->
+    <div *ngIf="showTablePreview" class="preview">
+      <h3>📊 {{ tableName }} Tablosu</h3>
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let col of columns">{{ col.key }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of previewData">
+            <td *ngFor="let col of columns">
+              <input type="text" [(ngModel)]="row[col.key]">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn add-row" (click)="addNewRow()">➕ Satır Ekle</button>
+    </div>
+
+    <!-- ✅ Oluşturulan Tablo Detayları -->
+    <div *ngIf="createdTableDetails" class="created-table-info">
+      <h3>✅ Oluşturulan Tablo: {{ createdTableDetails.tableName }}</h3>
+
+      <h4>📌 Kolonlar</h4>
+      <ul>
+        <li *ngFor="let column of createdTableDetails.columns">
+          {{ column.key }} - {{ column.type }}
+        </li>
+      </ul>
+
+      <h4>🔗 Yabancı Anahtarlar</h4>
+      <ul *ngIf="createdTableDetails.foreignKeys.length">
+        <li *ngFor="let fk of createdTableDetails.foreignKeys">
+          {{ fk.column }} → {{ fk.references }} ({{ fk.relation }})
+        </li>
+      </ul>
+
+      <h4>⏰ Alarm Durumu: {{ createdTableDetails.enableAlarm ? 'Aktif' : 'Pasif' }}</h4>
+    </div>
+
+  </div>
+</div>

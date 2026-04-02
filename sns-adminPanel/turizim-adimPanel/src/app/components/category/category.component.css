@@ -1,0 +1,123 @@
+/* ✅ Sayfanın tamamını kaplamasını sağla */
+.category-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Tüm ekran yüksekliğini kaplar */
+  background: #121212;
+}
+
+/* ✅ Form Konteyneri */
+.category-container {
+  width: 50%; /* Sayfanın yarısını kaplayacak */
+  padding: 30px;
+  background: #222;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+/* ✅ Başlık */
+.category-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ✅ Form Kontrolleri */
+.form-control {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ✅ Input ve Select */
+input, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #333;
+  color: white;
+  font-size: 14px;
+}
+
+/* ✅ Detay Ekleme Bölümü */
+.detail-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ✅ Butonlar */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* ✅ Detay Ekle Butonu */
+.add-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.add-btn:hover {
+  background: #45a049;
+}
+
+/* ✅ Kategori Kaydet Butonu */
+.create-btn {
+  width: 100%;
+  background: #007bff;
+  color: white;
+  font-size: 18px;
+}
+
+.create-btn:hover {
+  background: #0056b3;
+}
+
+/* ✅ Eklenen Detaylar Listesi */
+.detail-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.detail-list li {
+  background: #333;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ✅ Detay Silme Butonu */
+.delete-btn {
+  background: red;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}

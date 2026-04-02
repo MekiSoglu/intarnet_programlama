@@ -1,0 +1,91 @@
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  color: #00d26a;
+  font-weight: bold;
+  text-align: center;
+}
+
+.info-text {
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #252525;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #29a746;
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+tbody tr:nth-child(even) {
+  background: #2d2d2d;
+}
+
+tbody tr:hover {
+  background: #393939;
+}
+
+input, select {
+  background: #202020;
+  border: 1px solid #555;
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #00d26a;
+  box-shadow: 0 0 8px rgba(0, 210, 106, 0.8);
+}
+
+.delete-btn {
+  background: #ff3b3b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #d62828;
+}
+
+.add-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #0056b3;
+}

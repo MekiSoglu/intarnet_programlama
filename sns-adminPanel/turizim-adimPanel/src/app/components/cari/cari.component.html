@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>📊 Dinamik Tablolar</h2>
+
+  <!-- ✅ Cari Adı Girişi -->
+  <div class="section">
+    <h3>🏷️ Cari Adı</h3>
+    <input type="text" [(ngModel)]="cariName" placeholder="Cari adını girin..." class="cari-input">
+  </div>
+
+  <!-- ✅ Mevcut tablolar seçim kutusu -->
+  <div class="section">
+    <h3>📌 Mevcut Tablolar</h3>
+    <div class="dropdown">
+      <button class="dropbtn" (click)="toggleDropdown()">📂 Tabloları Seç</button>
+      <div class="dropdown-content" *ngIf="dropdownOpen">
+        <ul class="table-list">
+          <li *ngFor="let table of tables" (click)="selectTable(table)">
+            📂 {{ table }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Seçilen tablolar listesi -->
+  <div class="section" *ngIf="selectedTables.length > 0">
+    <h3>✅ Seçilen Tablolar</h3>
+    <ul class="selected-list">
+      <li *ngFor="let selected of selectedTables">
+        ✔️ {{ selected }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- ✅ Bağlantılı tablolar listesi -->
+  <div class="section" *ngIf="relatedTables.length > 0">
+    <h3>🔗 Bağlantılı Tablolar</h3>
+    <ul class="relation-list">
+      <li *ngFor="let relation of relatedTables" (click)="selectTable(relation.related_table)">
+        🔗 {{ relation.related_table }} <span class="relation-type">({{ relation.relation_type }})</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ✅ Create Cari Butonu -->
+  <div class="section">
+    <button class="create-btn" (click)="createCari()">➕ Create Cari</button>
+  </div>
+
+  <!-- ✅ Carilerim Butonu -->
+  <div class="section">
+    <button class="carilerim-btn" (click)="toggleCariler()">📜 Carilerim</button>
+  </div>
+
+  <!-- ✅ Cari Listesi -->
+  <div class="cari-list-container" *ngIf="cariler.length > 0 && showCariler">
+    <h3>📋 Mevcut Cariler</h3>
+    <ul class="cari-list">
+      <li *ngFor="let cari of cariler">
+        {{ cari }}
+        <button class="delete-btn" (click)="deleteCari(cari)">🗑️ Sil</button>
+      </li>
+    </ul>
+  </div>
+</div>

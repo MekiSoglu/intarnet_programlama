@@ -1,0 +1,76 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  background: #1e1e1e;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.drag-drop-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Genel kutular */
+.tables-list, .columns-list, .input-area, .selected-area {
+  width: 30%;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background: #2b2b2b;
+  min-height: 150px;
+}
+
+/* Tablolar ve kolonlar */
+.table-item, .column-item, .input-item {
+  padding: 8px;
+  margin: 5px 0;
+  background: #4caf50;
+  color: white;
+  border-radius: 5px;
+  cursor: grab;
+  text-align: center;
+}
+
+/* İşlem alanındaki öğeler */
+.selected-item {
+  background: #ff9800;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+}
+
+/* Input alanı */
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-area input {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #333;
+  color: white;
+}
+
+.input-area button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-area button:hover {
+  background: #388e3c;
+}

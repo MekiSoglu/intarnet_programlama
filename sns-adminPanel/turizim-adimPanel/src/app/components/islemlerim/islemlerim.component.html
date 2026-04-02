@@ -1,0 +1,69 @@
+<div class="islemler-container">
+  <h2>📋 {{ islemDetay?.islemAdi }} Detayları</h2>
+
+  <!-- ✅ Tablolar için seçim alanları -->
+  <div *ngFor="let table of islemDetay?.islemJson?.tables">
+    <div class="table-selector" (click)="toggleTable(table)">
+      📌 {{ table }}
+    </div>
+
+    <div *ngIf="selectedTable === table" class="table-data">
+      <h3>📂 {{ table }} Verileri</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let header of tableHeaders[table]">{{ header }}</th>
+            <th>Seç</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableData[table]">
+            <td *ngFor="let header of tableHeaders[table]">
+              {{ header.includes('date') ? formatDate(row[header]) : row[header] }}
+            </td>
+            <td>
+              <button class="select-btn" (click)="selectRow(table, row)">✅</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ✅ Seçilen veriler bölümü (Her tablo için ayrı) -->
+  <div *ngFor="let table of Object.keys(selectedRowsByTable)" class="selected-items">
+    <h3>📌 Seçimlerim - {{ table }}</h3>
+
+<table *ngIf="tableHeaders[table]?.length && selectedRowsByTable[table]?.length">
+  <thead>
+    <tr>
+      <th *ngFor="let header of tableHeaders[table]">{{ header }}</th>
+      <th>Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of selectedRowsByTable[table]; let i = index">
+      <td *ngFor="let header of tableHeaders[table]">
+        {{ header.includes('date') ? formatDate(row[header]) : row[header] }}
+      </td>
+      <td>
+        <button class="remove-btn" (click)="removeSelection(table, i)">❌</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+
+<div class="inputs-container" *ngIf="islemDetay?.islemJson?.inputs?.length">
+  <h3>📝 Girdi Alanları</h3>
+  <div *ngFor="let input of islemDetay?.islemJson?.inputs">
+    <label>{{ input?.name || 'Bilinmeyen Alan' }}</label>
+    <input [type]="getInputType(input?.dataType || 'text')" [(ngModel)]="inputValues[input?.name || 'unknown']" />
+  </div>
+</div>
+
+  <!-- ✅ İşlemi Tamamlama Butonu -->
+  <button (click)="completeOperation()">✅ İşlemi Bitir</button>
+</div>

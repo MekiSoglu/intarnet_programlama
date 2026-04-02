@@ -1,0 +1,29 @@
+<div class="container">
+
+  <!-- 📌 Eğer veri yoksa uyarı mesajı göster -->
+  <p *ngIf="!tableData || tableData.length === 0" class="warning-message">
+    Bu cari için veri bulunamadı.
+  </p>
+
+  <!-- 📌 Dinamik Tablo (Eğer Veri Varsa) -->
+  <table *ngIf="tableData && tableData.length > 0" class="data-table">
+    <thead>
+      <tr>
+        <th *ngFor="let col of tableColumns">{{ col }}</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData">
+        <td *ngFor="let col of tableColumns">{{ row[col] }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+       <tr>
+        <th *ngFor="let col of tableColumns">
+          <input type="text" [(ngModel)]="searchFilters[col]" (keydown.enter)="handleKeyPress($event, col)" placeholder="Ara...">
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

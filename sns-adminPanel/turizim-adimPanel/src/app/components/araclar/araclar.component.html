@@ -1,0 +1,36 @@
+<div class="table-container">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th *ngFor="let detailHeader of maxDetailsHeaders">{{ detailHeader }}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="products.length > 0">
+      <tr *ngFor="let product of products; let i = index">
+        <td contenteditable="true">{{ product.name }}</td>
+        <td contenteditable="true">{{ product.unitPrice }}</td>
+        <td contenteditable="true">{{ product.description }}</td>
+        <td *ngFor="let detail of productDetailsMap[product.id]" contenteditable="true">{{ detail.value }}</td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="products.length > 0">
+      <tr class="query-row">
+        <td>
+          <input type="text" placeholder="Enter Name" [(ngModel)]="searchInputs['name']" (keydown.enter)="onEnterSearch('name', searchInputs['name'])"/>
+        </td>
+        <td>
+          <input type="text" placeholder="Enter Price" [(ngModel)]="searchInputs['unitPrice']" (keydown.enter)="onEnterSearch('unitPrice', searchInputs['unitPrice'])"/>
+        </td>
+        <td>
+          <input type="text" placeholder="Enter Description" [(ngModel)]="searchInputs['description']" (keydown.enter)="onEnterSearch('description', searchInputs['description'])"/>
+        </td>
+        <td *ngFor="let detailHeader of maxDetailsHeaders">
+          <input type="text" placeholder="Enter {{ detailHeader }}" [(ngModel)]="searchInputs[detailHeader]" (keydown.enter)="onEnterSearch(detailHeader, searchInputs[detailHeader] || '')"/>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

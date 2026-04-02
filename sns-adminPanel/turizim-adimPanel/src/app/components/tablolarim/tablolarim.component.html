@@ -1,0 +1,108 @@
+<div class="container">
+  <h2>📋 {{ selectedTable }} Tablosu</h2>
+
+  <!-- ✅ Eğer tablo seçilmemişse -->
+  <div *ngIf="!selectedTable">
+    <p class="info-text">Lütfen bir tablo seçin.</p>
+  </div>
+
+  <!-- ✅ Tablo Alanı -->
+  <div *ngIf="selectedTable">
+    <table>
+      <thead>
+        <tr>
+          <ng-container *ngFor="let col of tableColumns">
+            <th *ngIf="col !== 'created_date'">{{ col }}</th>
+          </ng-container>
+          <th>🗑️</th> <!-- Silme Butonu Alanı -->
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- ✅ Mevcut Verileri Göster -->
+        <tr *ngFor="let row of tableData">
+          <ng-container *ngFor="let col of tableColumns">
+            <td *ngIf="col !== 'created_date'">
+
+              <!-- ✅ Eğer FK Kolonu ise Dropdown Göster -->
+              <ng-container *ngIf="isForeignKey(col); else normalInput">
+                <select (change)="updateRow(row.id, col, $event)">
+                  <option *ngFor="let option of foreignKeyOptions[col]" [value]="option.id"
+                          [selected]="row[col] === option.id">
+                    {{ option.value }}
+                  </option>
+                </select>
+              </ng-container>
+
+              <!-- ✅ Eğer Boolean (True/False) Alanı ise Dropdown Göster -->
+              <ng-template #normalInput>
+                <ng-container *ngIf="isBooleanColumn(col); else otherInputs">
+                  <select (change)="updateRow(row.id, col, $event)">
+                    <option [value]="true" [selected]="row[col] === true">✅ True</option>
+                    <option [value]="false" [selected]="row[col] === false">❌ False</option>
+                  </select>
+                </ng-container>
+
+                <!-- ✅ Eğer Tarih Alanı ise Datepicker Göster -->
+                <ng-template #otherInputs>
+                  <ng-container *ngIf="col.toLowerCase().includes('date'); else textInput">
+                    <input type="date" [value]="row[col]" (change)="updateRow(row.id, col, $event)">
+                  </ng-container>
+                  <ng-template #textInput>
+                    <input type="text" [value]="row[col]" (keydown.enter)="updateRow(row.id, col, $event)">
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+
+            </td>
+          </ng-container>
+          <td>
+            <button class="delete-btn" (click)="deleteRow(row.id)">❌</button>
+          </td>
+        </tr>
+
+        <!-- ✅ Yeni Veri Ekleme Alanı -->
+        <tr>
+          <ng-container *ngFor="let col of tableColumns">
+            <td *ngIf="col !== 'created_date'">
+
+              <!-- ✅ Eğer FK Kolonu ise Dropdown Kullan -->
+              <ng-container *ngIf="isForeignKey(col); else newRowInput">
+                <select [(ngModel)]="newRow[col]">
+                  <option *ngFor="let option of foreignKeyOptions[col]" [value]="option.id">
+                    {{ option.value }}
+                  </option>
+                </select>
+              </ng-container>
+
+              <!-- ✅ Eğer Boolean (True/False) Alanı ise Dropdown Kullan -->
+              <ng-template #newRowInput>
+                <ng-container *ngIf="isBooleanColumn(col); else otherNewRowInputs">
+                  <select [(ngModel)]="newRow[col]">
+                    <option [value]="true">✅ True</option>
+                    <option [value]="false">❌ False</option>
+                  </select>
+                </ng-container>
+
+                <!-- ✅ Eğer Tarih Alanı ise Datepicker Göster -->
+                <ng-template #otherNewRowInputs>
+                  <ng-container *ngIf="col.toLowerCase().includes('date'); else newRowTextInput">
+                    <input type="date" [(ngModel)]="newRow[col]">
+                  </ng-container>
+                  <ng-template #newRowTextInput>
+                    <input [type]="getInputTypeForNewRow(col)" [(ngModel)]="newRow[col]" placeholder="Enter {{ col }}" (keydown.enter)="handleKeyPress($event)">
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+
+            </td>
+          </ng-container>
+          <td>
+            <button class="add-btn" (click)="addNewRow()">➕ Create</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

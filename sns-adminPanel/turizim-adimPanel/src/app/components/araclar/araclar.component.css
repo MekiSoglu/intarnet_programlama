@@ -1,0 +1,64 @@
+/* Scrollbar için dış kapsayıcı */
+.table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #bcbcbc;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+/* Tablonun genel stili */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Başlıklar */
+.custom-table thead {
+  position: sticky;
+  top: 0;
+  background: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+/* Hücreler */
+.custom-table th, .custom-table td {
+  border: 1px solid #bcbcbc;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Satır arka planları (Excel tarzı şeritli görünüm) */
+.custom-table tbody tr:nth-child(even) {
+  background: #e6f2ff;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+/* Düzenlenebilir hücreler için stil */
+.custom-table td[contenteditable="true"] {
+  background-color: #fff;
+  outline: none;
+  cursor: text;
+}
+
+/* Düzenleme sırasında hücreye odaklanıldığında stil değişikliği */
+.custom-table td[contenteditable="true"]:focus {
+  background-color: #ffffcc;
+  border: 1px solid #ff9800;
+}
+
+/* Sorgu Sütunu için input stilleri */
+.query-row input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #bcbcbc;
+  box-sizing: border-box;
+}

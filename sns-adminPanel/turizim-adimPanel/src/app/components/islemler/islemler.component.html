@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>✏️ İşlem Tanımlama</h2>
+
+  <!-- ✅ İşlem Adı Girişi -->
+<!-- ✅ İşlem Adı ve Create Butonu -->
+<div class="operation-name">
+  <h3>📝 İşlem Adı</h3>
+  <input type="text" [(ngModel)]="operationName" placeholder="İşlem adını girin..." />
+  <button (click)="createOperation()">✅ Create</button>
+</div>
+
+
+  <div class="drag-drop-container">
+    <!-- ✅ 1. Bölüm: Mevcut Tablolar -->
+    <div cdkDropList [cdkDropListData]="tables" class="tables-list" (cdkDropListDropped)="dropTable($event)">
+      <h3>📌 Tablolar</h3>
+      <div *ngFor="let table of tables" cdkDrag class="table-item">
+        {{ table }}
+      </div>
+    </div>
+
+    <!-- ✅ 2. Bölüm: Seçilen Tablonun Kolonları -->
+    <div cdkDropList [cdkDropListData]="tableColumns[selectedTable]" class="columns-list" (cdkDropListDropped)="dropColumn($event)">
+      <h3>🛠 Seçilen Tablo: {{ selectedTable || 'Henüz Seçilmedi' }}</h3>
+      <div *ngFor="let column of tableColumns[selectedTable]" cdkDrag class="column-item">
+        {{ column }}
+      </div>
+    </div>
+
+    <!-- ✅ 3. Bölüm: Veri Girişi Alanı -->
+    <div class="input-area">
+      <h3>📥 Veri Girişi</h3>
+      <input type="text" [(ngModel)]="newInputName" placeholder="Girdi adı girin..." />
+      <button (click)="addNewInput()">➕ Ekle</button>
+
+      <!-- ✅ Yeni eklenen giriş alanları sürüklenebilir olacak -->
+      <div cdkDropList [cdkDropListData]="inputFields" class="input-list" (cdkDropListDropped)="dropInput($event)">
+        <div *ngFor="let input of inputFields" cdkDrag class="input-item">
+          Input: {{ input.name }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ 4. Bölüm: İşlem Alanı -->
+    <div cdkDropList [cdkDropListData]="selectedColumns" class="selected-area" (cdkDropListDropped)="dropToSelected($event)">
+      <h3>🎯 İşlem Alanı</h3>
+      <div *ngFor="let item of selectedColumns" class="selected-item">
+        {{ item.table ? (item.table + " - " + item.column) : "Input: " + item.name }}
+
+        <!-- ✅ Eğer bu bir input değilse işlem seçeneklerini göster -->
+        <select *ngIf="item.table" [(ngModel)]="item.operation">
+          <option value="increase">Arttır</option>
+          <option value="decrease">Azalt</option>
+          <option value="update">Güncelle</option>
+        </select>
+
+        <!-- ✅ Eğer bu bir input ise sadece veri tipini seçtir -->
+        <select *ngIf="!item.table" [(ngModel)]="item.dataType">
+          <option value="integer">Integer</option>
+          <option value="string">String</option>
+          <option value="boolean">Boolean</option>
+          <option value="date">Tarih</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

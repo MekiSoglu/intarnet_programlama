@@ -1,0 +1,87 @@
+/* ✅ Genel Sayfa Yapısı */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* ✅ Yan Menü */
+.sidebar {
+  width: 250px;
+  background-color: #1a1a1a;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(255, 255, 255, 0.1);
+}
+
+/* ✅ Menü Listesi */
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* ✅ Ana Kategoriler */
+.sidebar li {
+  padding: 12px 15px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+/* ✅ Hover Etkisi */
+.sidebar li:hover {
+  background-color: #333;
+  transform: translateX(5px);
+}
+
+/* ✅ Seçili Menü */
+.sidebar li.active {
+  background-color: #4caf50;
+  color: #fff;
+  border-left: 4px solid #34a853;
+  transform: translateX(10px);
+}
+
+/* ✅ Alt Kategoriler */
+.submenu {
+  list-style-type: none;
+  padding: 5px 0 5px 15px;
+  border-left: 2px solid #4caf50;
+  margin-top: 5px;
+}
+
+.submenu li {
+  font-size: 14px;
+  padding: 8px;
+  color: #ccc;
+  font-weight: normal;
+}
+
+.submenu li:hover {
+  color: #fff;
+  background-color: #4caf50;
+}
+
+/* ✅ Açılır Kapanır Ok İşaretleri */
+.arrow {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotate {
+  transform: rotate(90deg);
+}
+
+/* ✅ İçerik Alanı */
+.content {
+  flex: 1;
+  padding: 30px;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+}

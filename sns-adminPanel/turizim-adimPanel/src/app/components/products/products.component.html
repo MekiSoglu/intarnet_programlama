@@ -1,0 +1,48 @@
+<div class="form-group">
+  <h2>Products</h2>
+  <form (ngSubmit)="saveProduct()">
+    <div class="form-control">
+      <label for="category">Category:</label>
+<select id="category" [(ngModel)]="product.categoryId" name="category" required>
+  <option *ngFor="let category of categories" [value]="category?.id">{{ category?.categoryName }}</option>
+</select>
+
+    </div>
+
+    <div class="form-control">
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="product.name" name="name" required />
+    </div>
+
+    <div class="form-control">
+      <label for="price">Price:</label>
+      <input id="price" [(ngModel)]="product.unitPrice" name="price" type="number" required />
+    </div>
+
+    <div class="form-control">
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="product.description" name="description"></textarea>
+    </div>
+
+    <button type="submit">Save</button>
+  </form>
+
+  <div class="form-group">
+    <h3>Product Details</h3>
+    <div class="form-control">
+      <label for="products">Products:</label>
+      <select id="products" (change)="onProductChange($event)">
+        <option *ngFor="let prod of products" [value]="prod.id">{{ prod.name }}</option>
+      </select>
+    </div>
+
+<div *ngFor="let detail of productDetails; let i = index" class="form-control">
+  <label *ngIf="categoryDetails[i]" for="detail-{{i}}">
+    {{ categoryDetails[i]?.name }}
+  </label>
+  <input id="detail-{{i}}" [(ngModel)]="detail.value" name="detail-{{i}}" />
+</div>
+
+    <button (click)="saveProductDetails()">Save Details</button>
+  </div>
+</div>

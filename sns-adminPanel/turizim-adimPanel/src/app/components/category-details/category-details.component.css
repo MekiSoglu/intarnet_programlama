@@ -1,0 +1,109 @@
+/* ✅ Ana Sayfa Stili */
+.category-details-wrapper {
+  display: flex;
+  flex-direction: column; /* İçerikleri alt alta koyar */
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding-top: 50px;
+  background: #121212;
+}
+
+/* ✅ Form ve Liste için Container */
+.category-details-container, .category-list-container {
+  width: 50%;
+  padding: 25px;
+  background: #222;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  margin-bottom: 20px; /* Alt alta düzgün yerleşmesi için boşluk bırakır */
+}
+
+/* ✅ Başlık Stilleri */
+h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ✅ Form Elemanları */
+.form-control {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ✅ Input ve Select */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #333;
+  color: white;
+  font-size: 14px;
+}
+
+/* ✅ Buton */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* ✅ Ekleme Butonu */
+.create-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.create-btn:hover {
+  background: #45a049;
+}
+
+/* ✅ Liste Stili */
+.detail-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.detail-list li {
+  background: #333;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+/* ✅ Silme Butonu */
+.delete-btn {
+  background: red;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}
