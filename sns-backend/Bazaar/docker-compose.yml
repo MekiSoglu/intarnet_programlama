@@ -1,0 +1,5 @@
+services:
+  meki:
+    image: zeus12419/devops-integration:latest
+    ports:
+      - "8080:8080"
